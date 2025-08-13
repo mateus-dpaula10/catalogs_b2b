@@ -1,0 +1,46 @@
+$bg_header: #1E3A8A;
+$btn_destaque: #2563EB;
+$bg_geral: #F9FAFB;
+$borda: #E5E7EB;
+$texto_principal: #111827;
+$cinza_secundario: #6B7280;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    min-height: 100dvh;
+    justify-content: center;
+    align-items: center;
+
+    #block {
+        width: 90%;
+        max-width: 600px;
+        border-radius: .375rem;
+        border: 1px solid $borda;
+        display: flex;
+
+        > div {
+            flex-grow: 1;
+            flex-basis: 0;
+            min-height: 40dvh;
+
+            &:nth-of-type(1) {
+                background-color: $bg_header;
+                border-radius: .375rem 0 0 .375rem;
+            }
+
+            &:nth-of-type(2) {
+                padding: 2rem;
+                border-radius: 0 .375rem .375rem 0;
+                display: flex; 
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+    }
+}

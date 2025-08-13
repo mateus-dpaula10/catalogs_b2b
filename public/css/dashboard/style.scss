@@ -1,0 +1,27 @@
+$bg_header: #1E3A8A;
+$btn_destaque: #2563EB;
+$bg_geral: #F9FAFB;
+$borda: #E5E7EB;
+$texto_principal: #111827;
+$cinza_secundario: #6B7280;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+}
+
+aside {
+    width: 240px;
+    background-color: $bg_header;
+    min-height: 100dvh;
+}
+
+main {
+    background-color: $bg_geral;
+    width: 100%;
+}
