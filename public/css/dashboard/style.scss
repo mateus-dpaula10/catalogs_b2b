@@ -19,9 +19,41 @@ aside {
     width: 240px;
     background-color: $bg_header;
     min-height: 100dvh;
+    padding: 1rem 0;
+
+    img {
+        padding: 0 1rem 5rem;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        
+        li {
+            list-style: none;
+
+            a {
+                background-color: $borda;
+                width: 100%;
+                display: block;
+                padding: 1rem 2rem;
+                border-bottom: 1px solid $cinza_secundario;
+                text-decoration: none;
+                text-align: center;
+                color: $bg_header;
+                transition: all .35s ease-in-out;
+
+                &:hover {
+                    background-color: $bg_header;
+                    color: $borda;
+                }
+            }
+        }
+    }
 }
 
 main {
+    padding: 1rem 0;
     background-color: $bg_geral;
     width: 100%;
 }

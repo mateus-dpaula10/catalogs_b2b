@@ -11,7 +11,19 @@
 </head>
 <body>
     <aside>
+        <img src="" alt="Logo do sistema">
 
+        <ul>
+            <li>
+                <a href="{{ route('dashboard.index') }}">Dashboard</a>
+            </li>
+            <li>
+                <a href="{{ route('company.index') }}">Empresas</a>
+            </li>
+            <li>
+                <a href="">Sair</a>
+            </li>
+        </ul>
     </aside>
 
     <main>
@@ -29,5 +41,7 @@
         crossorigin="anonymous" 
         referrerpolicy="no-referrer">
     </script>
+
+    @stack('scripts')
 </body>
 </html>

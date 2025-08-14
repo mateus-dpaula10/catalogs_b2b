@@ -12,9 +12,36 @@ aside {
   width: 240px;
   background-color: #1E3A8A;
   min-height: 100dvh;
+  padding: 1rem 0;
+}
+aside img {
+  padding: 0 1rem 5rem;
+}
+aside ul {
+  margin: 0;
+  padding: 0;
+}
+aside ul li {
+  list-style: none;
+}
+aside ul li a {
+  background-color: #E5E7EB;
+  width: 100%;
+  display: block;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #6B7280;
+  text-decoration: none;
+  text-align: center;
+  color: #1E3A8A;
+  transition: all 0.35s ease-in-out;
+}
+aside ul li a:hover {
+  background-color: #1E3A8A;
+  color: #E5E7EB;
 }
 
 main {
+  padding: 1rem 0;
   background-color: #F9FAFB;
   width: 100%;
 }/*# sourceMappingURL=style.css.map */
