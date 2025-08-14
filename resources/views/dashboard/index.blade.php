@@ -8,6 +8,6 @@
             <div class="col-12">
                 Dashboard
             </div>
-        </div>
+        </div>  
     </div>
 @endsection

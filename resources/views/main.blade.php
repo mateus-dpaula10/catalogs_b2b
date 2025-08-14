@@ -11,7 +11,7 @@
 </head>
 <body>
     <aside>
-        <img src="" alt="Logo do sistema">
+        <img src="{{ asset('img/auth/bg.png') }}" alt="Logo do sistema">
 
         <ul>
             <li>

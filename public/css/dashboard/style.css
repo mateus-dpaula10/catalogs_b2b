@@ -16,6 +16,10 @@ aside {
 }
 aside img {
   padding: 0 1rem 5rem;
+  width: 8vw;
+  min-width: 8rem;
+  display: block;
+  margin: 0 auto;
 }
 aside ul {
   margin: 0;

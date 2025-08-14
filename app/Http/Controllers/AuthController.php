@@ -36,4 +36,9 @@ class AuthController extends Controller
             'email' => 'As credenciais estão incorretas.'
         ])->onlyInput('email');
     }
+
+    public function logout()
+    {   
+        
+    }
 }
