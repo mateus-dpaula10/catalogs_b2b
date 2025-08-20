@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('cnpj')->nullable();
-            $table->string('email')->nullable();
+            $table->string('name')->unique();
+            $table->string('phone_number', 20);
+            $table->enum('type', ['catalog', 'store', 'budge']);
             $table->timestamps();
         });
     }
