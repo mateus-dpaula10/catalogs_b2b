@@ -12,52 +12,90 @@ $cinza_secundario: #6B7280;
 }
 
 body {
-    display: flex;
-}
+    background-color: $bg_geral;
 
-aside {
-    width: 240px;
-    background-color: $bg_header;
-    min-height: 100dvh;
-    padding: 1rem 0;
+    header {
+        width: 100vw;
+        background-color: #FFF;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-    img {
-        padding: 0 1rem 5rem;
-        width: 8vw;
-        min-width: 8rem;
-        display: block;
-        margin: 0 auto;
+        img {
+            width: 4vw;
+            min-width: 4rem;
+        }
     }
 
-    ul {
-        margin: 0;
-        padding: 0;
+    .d-flex {
+        flex-wrap: wrap;
+
+        aside {
+            width: 300px;
+            // padding: 2rem 1rem;
+            transition: all .3s ease-in-out;
         
-        li {
-            list-style: none;
-
-            a {
-                background-color: $borda;
-                width: 100%;
-                display: block;
-                padding: 1rem 2rem;
-                border-bottom: 1px solid $cinza_secundario;
-                text-decoration: none;
-                text-align: center;
-                color: $bg_header;
-                transition: all .35s ease-in-out;
-
-                &:hover {
-                    background-color: $bg_header;
-                    color: $borda;
+            &.opened {
+                width: 300px;
+            }
+        
+            @media (min-width: 600px) {
+                width: 300px;
+        
+                &.opened {
+                    width: 0;
+                }
+            }
+        
+            ul {
+                margin: 0;
+                padding: 3rem 1rem;
+                
+                li {
+                    list-style: none;
+        
+                    a {
+                        color: $texto_principal;
+                        text-decoration: none;
+                        display: block;
+                        width: 100%;
+                        font-weight: 500;
+                        font-size: 1.25rem;
+        
+                        &:hover {
+                            color: #2EABFF;
+                        }
+                    }
+        
+                    &:not(:first-of-type) {
+                        margin-top: 1rem;
+                    }
                 }
             }
         }
+        
+        main {
+            padding: 3rem 1rem;
+            background-color: $bg_geral;
+            width: calc(100% - 300px);
+            position: relative;
+        
+            #toggle_button {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 2.5rem;
+                height: 2.5rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.5rem;
+                background-color: transparent;
+                border: 0;
+                border-radius: 0 0 .25rem;
+                color: $texto_principal;
+            }
+        }
     }
-}
-
-main {
-    padding: 1rem 0;
-    background-color: $bg_geral;
-    width: 100%;
 }
