@@ -10,4 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         aside.classList.toggle('opened');
     });
+
+    ClassicEditor
+        .create(document.querySelector('#description'), {
+            toolbar: ['bold', 'italic', 'underline', 'bulletedList', 'numberedList', 'link']
+        })
+        .catch(error => console.error(error));
 })

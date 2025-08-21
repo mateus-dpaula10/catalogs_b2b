@@ -39,7 +39,7 @@ body .d-flex aside.opened {
 }
 body .d-flex aside ul {
   margin: 0;
-  padding: 3rem 1rem;
+  padding: 3rem 0rem;
 }
 body .d-flex aside ul li {
   list-style: none;
@@ -51,6 +51,7 @@ body .d-flex aside ul li a {
   width: 100%;
   font-weight: 500;
   font-size: 1.25rem;
+  padding: 0 1rem;
 }
 body .d-flex aside ul li a:hover {
   color: #2EABFF;
@@ -59,7 +60,7 @@ body .d-flex aside ul li:not(:first-of-type) {
   margin-top: 1rem;
 }
 body .d-flex main {
-  padding: 3rem 1rem;
+  padding: 3rem 0;
   background-color: #F9FAFB;
   width: calc(100% - 300px);
   position: relative;

@@ -22,7 +22,7 @@
                     <a href=""><i class="bi bi-house me-2"></i>Início</a>
                 </li>
                 <li>
-                    <a href=""><i class="bi bi-cart me-2"></i>Produtos</a>
+                    <a href="{{ route('product.index', auth()->user()->id) }}"><i class="bi bi-cart me-2"></i>Produtos</a>
                 </li>
             </ul>
         </aside>
@@ -47,8 +47,7 @@
                                 {{ session('error') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>                    
                             </p>
-                        @endif
-                    
+                        @endif                    
                     
                         @if($errors->any())
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -74,6 +73,7 @@
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" 
         crossorigin="anonymous">
     </script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     @stack('scripts')
 </body>
 </html>

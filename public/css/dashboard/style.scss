@@ -50,7 +50,7 @@ body {
         
             ul {
                 margin: 0;
-                padding: 3rem 1rem;
+                padding: 3rem 0rem;
                 
                 li {
                     list-style: none;
@@ -62,6 +62,7 @@ body {
                         width: 100%;
                         font-weight: 500;
                         font-size: 1.25rem;
+                        padding: 0 1rem;
         
                         &:hover {
                             color: #2EABFF;
@@ -76,7 +77,7 @@ body {
         }
         
         main {
-            padding: 3rem 1rem;
+            padding: 3rem 0;
             background-color: $bg_geral;
             width: calc(100% - 300px);
             position: relative;
