@@ -87,7 +87,8 @@ body .d-flex main #products_index .products > .card {
 }
 body .d-flex main #products_index .products > .card .card-header img {
   border-radius: 0.375rem 0.375rem 0 0;
-  width: 100%;
+  width: 5rem;
+  max-width: 100%;
 }
 body .d-flex main #products_index .products > .card .card-body h5 {
   margin-bottom: 0;
@@ -102,6 +103,12 @@ body .d-flex main #products_index .products > .card .card-body button.addCart {
 body .d-flex main #products_index .products > .card .card-body button.addCart:hover {
   opacity: 0.9;
 }
+body .d-flex main #products_index .products > .card .card-body .d-flex a {
+  background-color: transparent;
+  color: #2EABFF;
+  padding: 0;
+  margin: 0;
+}
 body .d-flex main #products_index a {
   background-color: #2EABFF;
   color: #FFF;
@@ -111,13 +118,40 @@ body .d-flex main #products_index a {
   text-align: center;
   border-radius: 1.5rem;
   font-size: 1rem;
+  text-decoration: none;
 }
-body .d-flex main #products_create button[type=submit] {
+body .d-flex main #products_index button[type=submit] {
+  background-color: transparent;
+  color: #2EABFF;
+  border: 0;
+}
+body .d-flex main #products_edit #current_images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+body .d-flex main #products_edit #current_images > div {
+  width: calc(20% - 0.4rem);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+body .d-flex main #products_edit #current_images > div .img-thumbnail {
+  height: 6rem;
+  width: 6rem;
+  max-width: 100%;
+}
+body .d-flex main #products_edit #image_preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+body .d-flex main button[type=submit] {
   background-color: #2EABFF;
   border-color: #2EABFF;
   opacity: 1;
   transition: all 0.35s ease-in-out;
 }
-body .d-flex main #products_create button[type=submit]:hover {
+body .d-flex main button[type=submit]:hover {
   opacity: 0.9;
 }/*# sourceMappingURL=style.css.map */

@@ -107,7 +107,8 @@ body {
                         .card-header {
                             img {
                                 border-radius: .375rem .375rem 0 0;
-                                width: 100%;
+                                width: 5rem;
+                                max-width: 100%;
                             }
                         }
 
@@ -127,6 +128,15 @@ body {
                                     opacity: .9;
                                 }
                             }
+
+                            .d-flex {
+                                a {
+                                    background-color: transparent;
+                                    color: $btn_destaque;
+                                    padding: 0;
+                                    margin: 0;
+                                }
+                            }
                         }
                     }
                 }
@@ -140,19 +150,55 @@ body {
                     text-align: center;
                     border-radius: 1.5rem;
                     font-size: 1rem;
+                    text-decoration: none;
+                }
+
+                button[type='submit'] {
+                    background-color: transparent;
+                    color: $btn_destaque;
+                    border: 0;
                 }
             }
 
             #products_create {
-                button[type='submit'] {
-                    background-color: $btn_destaque;
-                    border-color: $btn_destaque;
-                    opacity: 1;
-                    transition: all .35s ease-in-out;
+                
+            }
 
-                    &:hover {
-                        opacity: .9;
+            #products_edit {
+                #current_images {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: .5rem;
+
+                    > div {
+                        width: calc(20% - .4rem);
+                        display: flex;
+                        justify-content: center;
+                        flex-direction: column;
+
+                        .img-thumbnail {
+                            height: 6rem;
+                            width: 6rem;
+                            max-width: 100%;
+                        }
                     }
+                }
+
+                #image_preview {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: .5rem;
+                }
+            }
+
+            button[type='submit'] {
+                background-color: $btn_destaque;
+                border-color: $btn_destaque;
+                opacity: 1;
+                transition: all .35s ease-in-out;
+
+                &:hover {
+                    opacity: .9;
                 }
             }
         }

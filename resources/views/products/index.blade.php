@@ -4,34 +4,44 @@
 
 @section('content')
     <div id="products_index">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="mb-3">Seus produtos</h4>
+        @if ($products->count() > 0)
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Seus produtos</h4>
 
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-                    @foreach ($products as $product)
-                        <div class="col products mt-2">
-                            <div class="card">
-                                <div class="card-header p-0">
-                                    @foreach($product->images as $image)
-                                        @if($image->is_main)
-                                            <img src="{{ asset('storage/' . $image->path) }}" alt="Imagem do produto '{{ $product->name }}'">
-                                            @break
-                                        @endif
-                                    @endforeach
-                                </div>
-                                <div class="card-body">
-                                    <h5>{{ $product->name }}</h5>
-                                    <p>{!! $product->description !!}</p>
-                                    <p>Marca: {{ $product->brand->name }} / <br> Categoria: {{ $product->category->name }}</p>
-                                    <button class="btn btn-primary addCart">Preço: R$ {{ number_format($product->price, 2, ',', '.') }}</button>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+                        @foreach ($products as $product)
+                            <div class="col products mt-2">
+                                <div class="card">
+                                    <div class="card-header p-0">
+                                        @foreach($product->images as $image)
+                                            @if($image->is_main)
+                                                <img src="{{ asset('storage/' . $image->path) }}" alt="Imagem do produto '{{ $product->name }}'">
+                                                @break
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                    <div class="card-body">
+                                        <h5>{{ $product->name }}</h5>
+                                        <p>{!! $product->description !!}</p>
+                                        <p>Marca: {{ $product->brand->name }} / <br> Categoria: {{ $product->category->name }}</p>
+                                        <button title="Adicionar ao carrinho" class="btn btn-primary addCart">Preço: R$ {{ number_format($product->price, 2, ',', '.') }}</button>
+                                        <div class="d-flex justify-content-between mt-2">
+                                            <a href="{{ route('product.edit', $product) }}"><i class="bi bi-pen me-2"></i>Editar</a>
+                                            <form action="{{ route('product.destroy', $product) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"><i class="bi bi-trash2 me-2"></i>Excluir</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
 
         <div class="card mt-3">
             <div class="card-body">
