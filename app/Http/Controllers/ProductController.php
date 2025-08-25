@@ -12,10 +12,12 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     public function index(User $user) {
-        return view ('products.index', compact('user'));
+        $products = Product::with('category', 'brand', 'images', 'mainImage')->get();
+
+        return view ('products.index', compact('user', 'products'));
     }
 
-    public function create() {
+    public function create(User $user) {
         $companies = Company::where('id', $user->company_id)->get();
         $categories = Category::where('company_id', $user->company_id)->get();
         $brands = Brand::where('company_id', $user->company_id)->get();

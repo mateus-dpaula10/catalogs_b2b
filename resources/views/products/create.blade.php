@@ -31,7 +31,9 @@
                             <small>Selecione até 10 imagens.</small> <br>
                             <small>A primeira imagem será a imagem principal.</small> <br>
                             <small>Recomendamos imagens quadradas de 900px por 900px jpg, jpeg, ou png de até 5MB.</small> <br><br>
-                            <input type="file" name="images[]" id="images" class="form-input-file" multiple required>
+                            <input type="file" name="images[]" id="images" class="form-input-file" multiple required accept="image/*">
+
+                            <div id="image_preview" class="mt-3"></div>
                         </div>
                     </div>
                 </div>
@@ -59,7 +61,6 @@
     
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="new_category" placeholder="Nova categoria">
-                                    <button type="submit" class="btn btn-primary">Criar</button>
                                 </div>
                                 
                                 <select name="category_id" id="category_id" class="form-select mt-1">
@@ -77,7 +78,6 @@
     
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="new_brand" placeholder="Nova marca">
-                                    <button type="submit" class="btn btn-primary">Criar</button>
                                 </div>
                                 
                                 <select name="brand_id" id="brand_id" class="form-select mt-1">
@@ -92,9 +92,47 @@
                 </div>            
 
                 <div class="col-12 mt-3">
-                    <button type="submit" class="btn btn-outline-primary w-100">Cadastrar produto</button>
+                    <button type="submit" class="btn btn-primary w-100">Cadastrar produto</button>
                 </div>
             </div>
         </form>
     </div>
 @endsection
+
+@push ('scripts')
+    <script>
+        document.getElementById('images').addEventListener('change', function (e) {
+            const previewContainer = document.getElementById('image_preview');
+            previewContainer.innerHTML = '';
+
+            const files = e.target.files;
+
+            if (files.length > 10) {
+                alert('Você só pode selecionar até 10 imagens.');
+                return;
+            }
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                if (!file.type.startsWith('image/')) {
+                    alert('Somente arquivos de imagem são permitidos.');
+                    continue;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = e.target.result;
+                    imgElement.classList.add('img-thumbnail', 'mr-2');
+                    imgElement.style.width = '100px';
+                    imgElement.style.height = '100px';
+                    imgElement.style.marginBottom = '10px';
+                    
+                    previewContainer.appendChild(imgElement);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+@endpush

@@ -1,5 +1,5 @@
 $bg_header: #1E3A8A;
-$btn_destaque: #2563EB;
+$btn_destaque: #2EABFF;
 $bg_geral: #F9FAFB;
 $borda: #E5E7EB;
 $texto_principal: #111827;
@@ -15,7 +15,6 @@ body {
     background-color: $bg_geral;
 
     header {
-        width: 100vw;
         background-color: #FFF;
         padding: 1rem;
         display: flex;
@@ -32,16 +31,16 @@ body {
         flex-wrap: wrap;
 
         aside {
-            width: 300px;
+            width: 200px;
             // padding: 2rem 1rem;
             transition: all .3s ease-in-out;
         
             &.opened {
-                width: 300px;
+                width: 200px;
             }
         
             @media (min-width: 600px) {
-                width: 300px;
+                width: 200px;
         
                 &.opened {
                     width: 0;
@@ -61,11 +60,11 @@ body {
                         display: block;
                         width: 100%;
                         font-weight: 500;
-                        font-size: 1.25rem;
+                        font-size: 1rem;
                         padding: 0 1rem;
         
                         &:hover {
-                            color: #2EABFF;
+                            color: $btn_destaque;
                         }
                     }
         
@@ -79,7 +78,7 @@ body {
         main {
             padding: 3rem 0;
             background-color: $bg_geral;
-            width: calc(100% - 300px);
+            width: calc(100% - 200px);
             position: relative;
         
             #toggle_button {
@@ -96,6 +95,65 @@ body {
                 border: 0;
                 border-radius: 0 0 .25rem;
                 color: $texto_principal;
+            }
+
+            #products_index {
+                text-align: center;
+
+                .products {
+                    > .card {
+                        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+                        .card-header {
+                            img {
+                                border-radius: .375rem .375rem 0 0;
+                                width: 100%;
+                            }
+                        }
+
+                        .card-body {
+                            h5 {
+                                margin-bottom: 0;
+                            }
+
+                            button.addCart {
+                                background-color: $btn_destaque;
+                                border-color: $btn_destaque;
+                                opacity: 1;
+                                transition: all .35s ease-in-out;
+                                width: 100%;
+
+                                &:hover {
+                                    opacity: .9;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                a {
+                    background-color: $btn_destaque;
+                    color: #FFF;
+                    padding: .5rem 1rem;
+                    display: table;
+                    margin: 0 auto;
+                    text-align: center;
+                    border-radius: 1.5rem;
+                    font-size: 1rem;
+                }
+            }
+
+            #products_create {
+                button[type='submit'] {
+                    background-color: $btn_destaque;
+                    border-color: $btn_destaque;
+                    opacity: 1;
+                    transition: all .35s ease-in-out;
+
+                    &:hover {
+                        opacity: .9;
+                    }
+                }
             }
         }
     }
