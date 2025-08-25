@@ -96,7 +96,7 @@ class AuthController extends Controller
 
             $user = Auth::user();
 
-            return redirect()->route('product.index', $user)->with('success', 'Usuário e empresas criados com sucesso.');
+            return redirect()->route('product.index', $user)->with('success', 'Usuário logado com sucesso.');
         }
 
         return redirect()->route('auth.login')->with('error', 'E-mail ou senha inválidos.');

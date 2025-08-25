@@ -16,5 +16,6 @@ Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/login', [AuthController::class, 'logar'])->name('auth.logar');
 
 Route::get('/produtos/{user}', [ProductController::class, 'index'])->name('product.index');
+Route::post('/produtos', [ProductController::class, 'store'])->name('product.store');
 
 // Route::get('/consulta-cnpj/{cnpj}', [CompanyController::class, 'consultar'])->name('company.consultar');
