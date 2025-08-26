@@ -29,7 +29,7 @@
     
         <main>
             <button type="button" id="toggle_button">
-                X
+                ☰
             </button>
     
             <div class="container-fluid">

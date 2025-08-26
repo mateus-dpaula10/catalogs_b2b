@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -30,7 +31,14 @@ class ProductController extends Controller
         $user = auth()->user();
 
         $request->validate([
-            'name'        => 'required|string|max:255',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('products')->where(function ($query) use ($request) {
+                    return $query->where('company_id', $request->company_id);
+                }), 
+            ],
             'description' => 'required|string',
             'price'       => 'required|numeric|min:0',
             'company_id'  => 'required|exists:companies,id',
@@ -38,7 +46,8 @@ class ProductController extends Controller
             'images.*'    => 'image|mimes:jpg,jpeg,png|max:5120'
         ], [
             'name.required'        => 'O nome do produto é obrigatório.',
-            'name.max'             => 'O nome do produto não pode ter mais que 255 caracteres.',            
+            'name.max'             => 'O nome do produto não pode ter mais que 255 caracteres.',        
+            'name.unique'          => 'Já existe um produto com este nome nesta empresa.',    
             'description.required' => 'A descrição é obrigatória.',
             'price.required'       => 'O preço é obrigatório.',
             'price.numeric'        => 'O preço deve ser um número.',
@@ -54,32 +63,45 @@ class ProductController extends Controller
         ]);
 
         if ($request->filled('new_category')) {
-            $category = Category::create([
-                'name'       => $request->new_category,
-                'company_id' => $request->company_id
-            ]);
-            $request->merge(['category_id' => $category->id]);
+            $category = Category::firstOrCreate(
+                [
+                    'name' => $request->new_category,
+                    'company_id' => $request->company_id,
+                ]
+            );
+            $categoryId = $category->id;
+        } else {
+            $categoryId = $request->category_id;
         }
 
-        if (!$request->filled('category_id')) {
+        if (!$categoryId) {
             return back()->withErrors(['category_id' => 'Selecione ou crie uma categoria.']);
         }
 
         if ($request->filled('new_brand')) {
-            $brand = Brand::create([
-                'name'       => $request->new_brand,
-                'company_id' => $request->company_id
-            ]);
-            $request->merge(['brand_id' => $brand->id]);
-        }        
+            $brand = Brand::firstOrCreate(
+                [
+                    'name' => $request->new_brand,
+                    'company_id' => $request->company_id,
+                ]
+            );
+            $brandId = $brand->id;
+        } else {
+            $brandId = $request->brand_id;
+        }    
 
-        if (!$request->filled('brand_id')) {
+        if (!$brandId) {
             return back()->withErrors(['brand_id' => 'Selecione ou crie uma marca.']);
         }
 
-        $product = Product::create($request->only([
-            'name', 'description', 'price', 'company_id', 'category_id', 'brand_id'
-        ]));
+        $product = Product::create([
+            'name'        => $request->name,
+            'description' => $request->description,
+            'price'       => $request->price,
+            'company_id'  => $request->company_id,
+            'category_id' => $categoryId,
+            'brand_id'    => $brandId,
+        ]);
 
         foreach ($request->file('images') as $index => $image) {
             $path = $image->store('products', 'public');
@@ -106,14 +128,22 @@ class ProductController extends Controller
         $user = auth()->user();
 
         $request->validate([
-            'name'        => 'required|string|max:255',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('products')
+                    ->where(fn ($query) => $query->where('company_id', $request->company_id))
+                    ->ignore($product->id) 
+            ],
             'description' => 'required|string',
             'price'       => 'required|numeric|min:0',
             'company_id'  => 'required|exists:companies,id',
             'images.*'    => 'image|mimes:jpg,jpeg,png|max:5120'
         ], [
             'name.required'        => 'O nome do produto é obrigatório.',
-            'name.max'             => 'O nome do produto não pode ter mais que 255 caracteres.',            
+            'name.max'             => 'O nome do produto não pode ter mais que 255 caracteres.',        
+            'name.unique'          => 'Já existe um produto com este nome nesta empresa.',     
             'description.required' => 'A descrição é obrigatória.',
             'price.required'       => 'O preço é obrigatório.',
             'price.numeric'        => 'O preço deve ser um número.',
@@ -129,32 +159,45 @@ class ProductController extends Controller
         ]);
 
         if ($request->filled('new_category')) {
-            $category = Category::create([
-                'name'       => $request->new_category,
-                'company_id' => $request->company_id
-            ]);
-            $request->merge(['category_id' => $category->id]);
+            $category = Category::firstOrCreate(
+                [
+                    'name' => $request->new_category,
+                    'company_id' => $request->company_id,
+                ]
+            );
+            $categoryId = $category->id;
+        } else {
+            $categoryId = $request->category_id;
         }
 
-        if (!$request->filled('category_id')) {
+        if (!$categoryId) {
             return back()->withErrors(['category_id' => 'Selecione ou crie uma categoria.']);
         }
 
         if ($request->filled('new_brand')) {
-            $brand = Brand::create([
-                'name'       => $request->new_brand,
-                'company_id' => $request->company_id
-            ]);
-            $request->merge(['brand_id' => $brand->id]);
-        }        
+            $brand = Brand::firstOrCreate(
+                [
+                    'name' => $request->new_brand,
+                    'company_id' => $request->company_id,
+                ]
+            );
+            $brandId = $brand->id;
+        } else {
+            $brandId = $request->brand_id;
+        }    
 
-        if (!$request->filled('brand_id')) {
+        if (!$brandId) {
             return back()->withErrors(['brand_id' => 'Selecione ou crie uma marca.']);
         }
 
-        $product->update($request->only([
-            'name', 'description', 'price', 'company_id', 'category_id', 'brand_id'
-        ]));
+        $product->update([
+            'name'        => $request->name,
+            'description' => $request->description,
+            'price'       => $request->price,
+            'company_id'  => $request->company_id,
+            'category_id' => $categoryId,
+            'brand_id'    => $brandId,
+        ]);
 
         if ($request->has('delete_images')) {
             foreach ($request->delete_images as $imageId) {
@@ -206,5 +249,11 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('product.index', $user)->with('success', 'Produto excluído com sucesso!');
+    }
+
+    public function publicCatalog(Company $company) {
+        $products = $company->products()->with(['brand', 'category', 'images'])->get();
+
+        return view ('products.catalog', compact('company', 'products'));
     }
 }

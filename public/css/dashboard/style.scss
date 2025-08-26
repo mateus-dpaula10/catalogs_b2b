@@ -31,20 +31,19 @@ body {
         flex-wrap: wrap;
 
         aside {
-            width: 200px;
-            // padding: 2rem 1rem;
+            width: 0;
             transition: all .3s ease-in-out;
-        
+
             &.opened {
                 width: 200px;
             }
-        
+
             @media (min-width: 600px) {
                 width: 200px;
-        
+
                 &.opened {
                     width: 0;
-                }
+                }   
             }
         
             ul {
@@ -78,8 +77,21 @@ body {
         main {
             padding: 3rem 0;
             background-color: $bg_geral;
-            width: calc(100% - 200px);
             position: relative;
+            width: 100%;
+            transition: all .3s ease-in-out;
+
+            &.opened {
+                width: calc(100% - 200px);
+            }
+
+            @media (min-width: 600px) {
+                width: calc(100% - 200px);
+
+                &.opened {
+                    width: 100%;
+                }   
+            }
         
             #toggle_button {
                 position: absolute;
@@ -107,34 +119,60 @@ body {
                         .card-header {
                             img {
                                 border-radius: .375rem .375rem 0 0;
-                                width: 5rem;
                                 max-width: 100%;
+                                height: auto;
                             }
                         }
 
                         .card-body {
-                            h5 {
-                                margin-bottom: 0;
-                            }
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: .5rem;
 
-                            button.addCart {
-                                background-color: $btn_destaque;
-                                border-color: $btn_destaque;
-                                opacity: 1;
-                                transition: all .35s ease-in-out;
-                                width: 100%;
-
-                                &:hover {
-                                    opacity: .9;
+                            .product-image {
+                                img {                                    
+                                    width: 7rem;
+                                    height: 7rem;
                                 }
                             }
 
-                            .d-flex {
-                                a {
-                                    background-color: transparent;
-                                    color: $btn_destaque;
-                                    padding: 0;
-                                    margin: 0;
+                            .product-content {
+                                flex: 1 1;
+                                text-align: start;
+
+                                h5 {
+                                    margin-bottom: 0;
+                                }
+
+                                p {
+                                    &:last-of-type {
+                                        margin-bottom: 0;
+                                    }
+                                }
+                            }
+
+                            .product-actions {
+                                flex: 1 1 100%;
+
+                                button.addCart {
+                                    background-color: $btn_destaque;
+                                    border-color: $btn_destaque;
+                                    opacity: 1;
+                                    transition: all .35s ease-in-out;
+                                    width: 100%;
+    
+                                    &:hover {
+                                        opacity: .9;
+                                    }
+                                }
+
+                                .d-flex {
+                                    a {
+                                        background-color: transparent;
+                                        color: $btn_destaque;
+                                        padding: 0;
+                                        margin: 0;
+                                    }
                                 }
                             }
                         }
@@ -161,7 +199,17 @@ body {
             }
 
             #products_create {
-                
+                #image_preview {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: .5rem;
+
+                    .img-thumbnail {
+                        width: 100px;
+                        height: 100px;
+                        margin-bottom: 10px;
+                    }
+                }
             }
 
             #products_edit {
@@ -171,15 +219,13 @@ body {
                     gap: .5rem;
 
                     > div {
-                        width: calc(20% - .4rem);
                         display: flex;
-                        justify-content: center;
                         flex-direction: column;
+                        margin-bottom: 10px;
 
                         .img-thumbnail {
-                            height: 6rem;
-                            width: 6rem;
-                            max-width: 100%;
+                            width: 100px;
+                            height: 100px;
                         }
                     }
                 }
@@ -188,6 +234,12 @@ body {
                     display: flex;
                     flex-wrap: wrap;
                     gap: .5rem;
+
+                    .img-thumbnail {
+                        width: 100px;
+                        height: 100px;
+                        margin-bottom: 10px;
+                    }
                 }
             }
 

@@ -124,15 +124,31 @@
                 reader.onload = function(e) {
                     const imgElement = document.createElement('img');
                     imgElement.src = e.target.result;
-                    imgElement.classList.add('img-thumbnail', 'mr-2');
-                    imgElement.style.width = '100px';
-                    imgElement.style.height = '100px';
-                    imgElement.style.marginBottom = '10px';
+                    imgElement.classList.add('img-thumbnail');
                     
                     previewContainer.appendChild(imgElement);
                 };
                 reader.readAsDataURL(file);
             }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const newCategoryInput = document.querySelector('input[name="new_category"]');
+            const categorySelect = document.querySelector('select[name="category_id"]');
+            const newBrandInput = document.querySelector('input[name="new_brand"]');
+            const brandSelect = document.querySelector('select[name="brand_id"]');
+
+            newCategoryInput.addEventListener('input', function () {
+                if (this.value.trim() !== '') {
+                    categorySelect.selectedIndex = 0;
+                }
+            });
+
+            newBrandInput.addEventListener('input', function () {
+                if (this.value.trim() !== '') {
+                    brandSelect.selectedIndex = 0;
+                }
+            });
         });
     </script>
 @endpush

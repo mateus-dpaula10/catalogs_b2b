@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
+            $table->unique(['company_id', 'name']);
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

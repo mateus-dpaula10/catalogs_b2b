@@ -143,9 +143,6 @@
                     const imgElement = document.createElement('img');
                     imgElement.src = e.target.result;
                     imgElement.classList.add('img-thumbnail');
-                    imgElement.style.width = '6rem';
-                    imgElement.style.maxWidth = '100%';
-                    imgElement.style.height = '6rem';
                     
                     previewContainer.appendChild(imgElement);
                 };
