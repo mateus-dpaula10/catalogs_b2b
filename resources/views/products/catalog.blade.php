@@ -9,19 +9,19 @@
                 <h4 class="mb-3">Produtos de {{ $company->name }}</h4>
         
                 <ul class="list-group">
-                    @foreach($products as $product)
+                    @foreach($products as $index => $product)
                         <li class="list-group-item d-flex justify-content-between align-items-center mt-3">
                             <div>
                                 @if($product->mainImage)
                                     <img src="{{ asset('storage/'.$product->mainImage->path) }}" alt="{{ $product->name }}" style="width:50px; height:50px; object-fit:cover; margin-right:10px;">
                                 @endif
-                                <input type="checkbox" class="product-checkbox"
+                                <input type="checkbox" class="product-checkbox" id="product-checkbox-{{ $index }}"
                                     data-name="{{ $product->name }}"
                                     data-price="{{ $product->price }}"
                                     data-category="{{ $product->category->name }}"
                                     data-brand="{{ $product->brand->name }}"
                                     data-image="{{ asset('storage/'.$product->mainImage->path ?? '') }}">
-                                <strong>{{ $product->name }}</strong><br>
+                                <label for="product-checkbox-{{ $index }}"><strong>{{ $product->name }}</strong></label> <br>
                                 R$ {{ number_format($product->price, 2, ',', '.') }}<br>
                                 <small>Marca: {{ $product->brand->name }} / Categoria: {{ $product->category->name }}</small>
                             </div>
@@ -37,7 +37,12 @@
                         @csrf
                         <input type="hidden" name="products_data" id="products_data">
                         <button type="submit" class="btn btn-success" id="send_whatsapp">
-                            Enviar selecionados por WhatsApp
+                            @auth
+                                Enviar itens selecionados por WhatsApp                                 
+                            @endauth
+                            @guest
+                                Você precisa estar logado para enviar itens selecionados por WhatsApp
+                            @endguest
                         </button>
                     </form>
                 </div>

@@ -235,10 +235,16 @@ body {
                     flex-wrap: wrap;
                     gap: .5rem;
 
-                    .img-thumbnail {
+                    > div {
+                        display: flex;
+                        flex-wrap: wrap;
                         width: 100px;
-                        height: 100px;
                         margin-bottom: 10px;
+                        
+                        img {
+                            width: 100px;
+                            height: 100px;
+                        }
                     }
                 }
             }
@@ -251,10 +257,11 @@ body {
 
                     > div {
                         display: flex;
-                        flex-direction: column;
+                        flex-wrap: wrap;
+                        width: 100px;
                         margin-bottom: 10px;
 
-                        .img-thumbnail {
+                        img {
                             width: 100px;
                             height: 100px;
                         }
@@ -266,10 +273,16 @@ body {
                     flex-wrap: wrap;
                     gap: .5rem;
 
-                    .img-thumbnail {
+                    > div {
+                        display: flex;
+                        flex-wrap: wrap;
                         width: 100px;
-                        height: 100px;
                         margin-bottom: 10px;
+                        
+                        img {
+                            width: 100px;
+                            height: 100px;
+                        }
                     }
                 }
             }

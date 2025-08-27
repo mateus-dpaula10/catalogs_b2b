@@ -20,7 +20,7 @@
                     <button type="submit" class="fs-6"><i class="bi bi-box-arrow-in-right me-2"></i>Sair</button>
                 </form>        
             @else        
-                <a href="{{ route('auth.login') }}" class="fs-6"><i class="bi bi-person me-2"></i>Entrar</a>
+                <a href="{{ route('login') }}" class="fs-6"><i class="bi bi-person me-2"></i>Entrar</a>
             @endif
         </div>
     </header>

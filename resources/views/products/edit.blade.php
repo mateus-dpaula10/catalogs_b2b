@@ -46,6 +46,13 @@
                                                     Excluir
                                                 </label>
                                             </div>
+                                            <div class="form-check mt-1">
+                                                <input type="radio" name="existing_main_image_id" value="{{ $image->id }}" class="form-check-input" id="main_{{ $image->id }}"
+                                                    {{ $image->is_main ? 'checked' : '' }}>
+                                                <label for="main_{{ $image->id }}" class="form-check-label text-primary small">
+                                                    Definir como principal
+                                                </label>
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -140,11 +147,29 @@
 
                 const reader = new FileReader();
                 reader.onload = function(e) {
+                    const container = document.createElement('div');
+
                     const imgElement = document.createElement('img');
                     imgElement.src = e.target.result;
-                    imgElement.classList.add('img-thumbnail');
-                    
-                    previewContainer.appendChild(imgElement);
+
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = 'main_image_index';
+                    radio.id = 'main_image_index_' + i;
+                    radio.value = i;
+                    radio.classList.add('form-check-input');
+                    if (i === 0) radio.checked = true;
+
+                    const label = document.createElement('label');
+                    label.classList.add('form-check-label', 'ms-1');
+                    label.htmlFor = 'main_image_index_' + i;
+                    label.innerText = 'Principal';
+
+                    container.appendChild(imgElement);
+                    container.appendChild(radio);
+                    container.appendChild(label);
+
+                    previewContainer.appendChild(container);
                 };
                 reader.readAsDataURL(file);
             }

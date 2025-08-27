@@ -95,7 +95,7 @@
         <hr class="mt-4">
 
         <div class="form-group">
-            <p class="mb-0">Já tem cadastro? <a href="{{ route('auth.login') }}">Fazer login</a></p>
+            <p class="mb-0">Já tem cadastro? <a href="{{ route('login') }}">Fazer login</a></p>
         </div>
     </form>
 @endsection

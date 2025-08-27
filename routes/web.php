@@ -9,7 +9,6 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [AuthController::class, 'register'])->name('auth.register');
 Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/entrar', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/login', [AuthController::class, 'logar'])->name('auth.logar');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::get('/catalogo/{company:slug}', [ProductController::class, 'publicCatalog'])->name('product.catalog');

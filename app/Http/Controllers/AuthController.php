@@ -109,7 +109,7 @@ class AuthController extends Controller
             return redirect($intended)->with('success', 'Usuário logado com sucesso.');
         }
 
-        return redirect()->route('auth.login')->with('error', 'E-mail ou senha inválidos.');
+        return redirect()->route('login')->with('error', 'E-mail ou senha inválidos.');
     }
 
     public function logout(Request $request)
@@ -120,6 +120,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('auth.login')->with('success', 'Usuário deslogado com sucesso.');
+        return redirect()->route('login')->with('success', 'Usuário deslogado com sucesso.');
     }
 }
