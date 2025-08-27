@@ -12,25 +12,36 @@
 <body>
     <header>
         <img src="{{ asset('img/auth/bg.png') }}" alt="Bg tela de login">
-        <a href=""><i class="bi bi-box-arrow-in-right me-2"></i>Sair</a>
+        <div>
+            @if(Auth::user())
+                <form method="POST" action="{{ route('auth.logout') }}">
+                    <h6 class="fs-6">{{ auth()->user()->name }}</h6>
+                    @csrf
+                    <button type="submit" class="fs-6"><i class="bi bi-box-arrow-in-right me-2"></i>Sair</button>
+                </form>        
+            @else        
+                <a href="{{ route('auth.login') }}" class="fs-6"><i class="bi bi-person me-2"></i>Entrar</a>
+            @endif
+        </div>
     </header>
 
-    <div class="d-flex">
-        <aside>
-            <ul>
-                <li>
-                    <a href=""><i class="bi bi-house me-2"></i>Início</a>
-                </li>
-                <li>
-                    <a href="{{ route('product.index', auth()->user()->id) }}"><i class="bi bi-cart me-2"></i>Produtos</a>
-                </li>
-            </ul>
-        </aside>
+    <div class="d-flex" id="block_aside_main">
+        @if(Auth::user())
+            <aside>
+                <ul>
+                    <li>
+                        <a href="{{ route('product.index', auth()->user()->id) }}"><i class="bi bi-cart me-2"></i>Meus produtos</a>
+                    </li>                    
+                </ul>
+            </aside>
+        @endif
     
-        <main>
-            <button type="button" id="toggle_button">
-                ☰
-            </button>
+        <main class="{{ Auth::user() ? '' : 'full' }}">
+            @if(Auth::user())
+                <button type="button" id="toggle_button">
+                    ☰
+                </button>
+            @endif
     
             <div class="container-fluid">
                 <div class="row">

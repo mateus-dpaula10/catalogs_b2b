@@ -13,8 +13,16 @@ use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
-    public function index(User $user) {
-        $products = Product::with('category', 'brand', 'images', 'mainImage')->where('company_id', $user->company_id)->get();
+    public function index() {
+        $user = auth()->user();
+
+        if (!$user->company_id) {
+            return redirect()->route('auth.login')->with('error', 'Usuário não vinculado à loja.');
+        }
+
+        $products = Product::with('category', 'brand', 'images', 'mainImage')
+            ->where('company_id', $user->company_id)
+            ->get();
 
         return view ('products.index', compact('user', 'products'));
     }
@@ -255,5 +263,33 @@ class ProductController extends Controller
         $products = $company->products()->with(['brand', 'category', 'images'])->get();
 
         return view ('products.catalog', compact('company', 'products'));
+    }
+
+    public function send(Request $request) {
+        if (!auth()->check()) {
+            return redirect()->route('auth.login')
+                ->with('error', 'Você precisa estar logado para enviar os produtos.')
+                ->with('url.intended', url()->previous());
+        }
+
+        $user = auth()->user();
+
+        $products = json_decode($request->products_data, true);
+        $total = 0;
+        $message = "Segue a lista de produtos selecionados da nossa loja:\n";
+
+        foreach ($products as $product) {
+            $subtotal = $product['price'] * $product['qty'];
+            $total += $subtotal;
+
+            $message .= "\n- {$product['name']}\n  Marca: {$product['brand']}\n  Categoria: {$product['category']}\n  Quantidade: {$product['qty']}\n  Valor unitário: R$ ".number_format($product['price'], 2, ',', '.')."\n  Subtotal: R$ ".number_format($subtotal, 2, ',', '.')."\n  Imagem: {$product['image']}\n";
+        }
+
+        $message .= "\nValor total: R$ ".number_format($total, 2, ',', '.');
+
+        $companyPhone = $user->company->phone_number ?? '00000000000'; 
+        $whatsappUrl = "https://wa.me/55{$companyPhone}?text=".urlencode($message);
+
+        return redirect()->away($whatsappUrl);
     }
 }

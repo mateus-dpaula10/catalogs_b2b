@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -69,15 +70,25 @@ class AuthController extends Controller
             'type.in'               => 'Selecione um tipo válido: Catálogo, Loja virtual ou Orçamento.'
         ]);
 
+        $slug = Str::slug($data['company_name']);
+        $originalSlug = $slug;
+        $counter = 1;
+
+        while (Company::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+        }
+
         $company = Company::create([
             'name'         => $data['company_name'],
             'phone_number' => $data['phone_number'],
-            'type'         => $data['type']
+            'type'         => $data['type'],
+            'slug'         => $slug
         ]);
 
         $user->company()->associate($company)->save();
 
-        return redirect()->route('product.index', $user)->with('success', 'Usuário e empresas criados com sucesso.');
+        return redirect()->route('product.index')->with('success', 'Usuário e empresas criados com sucesso.');
     }
 
     public function login()
@@ -94,16 +105,21 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            $user = Auth::user();
-
-            return redirect()->route('product.index', $user)->with('success', 'Usuário logado com sucesso.');
+            $intended = session('url.intended', route('product.index'));
+            return redirect($intended)->with('success', 'Usuário logado com sucesso.');
         }
 
         return redirect()->route('auth.login')->with('error', 'E-mail ou senha inválidos.');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {   
-        
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('auth.login')->with('success', 'Usuário deslogado com sucesso.');
     }
 }

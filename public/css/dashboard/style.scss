@@ -16,7 +16,7 @@ body {
 
     header {
         background-color: #FFF;
-        padding: 1rem;
+        padding: 12px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -25,9 +25,31 @@ body {
             width: 4vw;
             min-width: 4rem;
         }
+
+        > div {
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+                align-items: center;
+            }
+
+            h6 {
+                margin: 0;
+                color: $btn_destaque;
+            }
+
+            button, a {
+                background-color: transparent;
+                color: $btn_destaque;
+                border: 0;
+                font-weight: 400;
+            }
+        }
     }
 
-    .d-flex {
+    .d-flex#block_aside_main {
+        box-shadow: 0 0 8px 4px rgba(0,0,0,.1);
         flex-wrap: wrap;
 
         aside {
@@ -60,7 +82,7 @@ body {
                         width: 100%;
                         font-weight: 500;
                         font-size: 1rem;
-                        padding: 0 1rem;
+                        padding: 0 12px;
         
                         &:hover {
                             color: $btn_destaque;
@@ -80,9 +102,14 @@ body {
             position: relative;
             width: 100%;
             transition: all .3s ease-in-out;
+            min-height: 100dvh;
 
             &.opened {
                 width: calc(100% - 200px);
+            }
+
+            &.full {
+                width: 100%;
             }
 
             @media (min-width: 600px) {
@@ -91,6 +118,10 @@ body {
                 &.opened {
                     width: 100%;
                 }   
+
+                &.full {
+                    width: 100%;
+                }
             }
         
             #toggle_button {
@@ -251,6 +282,17 @@ body {
 
                 &:hover {
                     opacity: .9;
+                }
+            }
+
+            #products_catalog {
+                h4 {
+                    text-align: center;
+                }
+
+                button#send_whatsapp {
+                    display: block;
+                    margin: 0 auto;
                 }
             }
         }

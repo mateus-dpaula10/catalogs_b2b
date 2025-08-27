@@ -31,7 +31,7 @@
                                             <p>Marca: {{ $product->brand->name }} / <br> Categoria: {{ $product->category->name }}</p>
                                         </div>
                                         <div class="product-actions">
-                                            <button title="Adicionar ao carrinho" class="btn btn-primary addCart">Preço: R$ {{ number_format($product->price, 2, ',', '.') }}</button>
+                                            <button class="btn btn-primary addCart">Preço: R$ {{ number_format($product->price, 2, ',', '.') }}</button>
                                             <div class="d-flex justify-content-between mt-2">
                                                 <a href="{{ route('product.edit', $product) }}"><i class="bi bi-pen me-2"></i>Editar</a>
                                                 <form action="{{ route('product.destroy', $product) }}" method="POST">
